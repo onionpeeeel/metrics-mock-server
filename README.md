@@ -33,12 +33,22 @@ metrics-mock-server/
 
 ## 엔드포인트
 
+### POST `/healthCheck`
+
+- **설명**: mock server에 대한 healthCheck용 API입니다.
+- **요청 본문**: JSON 형식의 메트릭 데이터
+
+
 ### POST `/metrics`
 
 - **설명**: 메트릭 데이터를 수신하고 처리합니다.
-- **요청 본문**: JSON 형식의 메트릭 데이터
-  ```json
-  {
-      "name": "example_metric",
-      "value": 123
-  }
+- **요청 데이터**: JSON 형식의 메트릭 데이터
+```Kotlin
+data class Metric(
+    val domain: String,
+    val itemId: String,
+    val userId: String,
+    val timestamp: Long = System.currentTimeMillis()
+)
+```
+
