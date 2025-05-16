@@ -5,7 +5,7 @@ appenders:
     kind: console
     filters:
       - kind: threshold
-        level: trace
+        level: info
     encoder:
       pattern: "{d(%Y-%m-%d %H:%M:%S)} [{l}] {f} - {m}{n}"
 
