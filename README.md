@@ -1,7 +1,7 @@
 # Metrics Mock Server
-Ktor 프레임워크를 사용하여 작성된 간단한 Metrics Mock Server입니다.  
-주요 목적은 `/metrics` 엔드포인트를 통해 메트릭 데이터를 수신하고 처리하는 것을
-local station에서 확인하기 위함에 있습니다.
+Ktor 프레임워크를 사용하여 작성된 간단한 Metrics Mock Server입니다. <br>
+주요 목적은 `/metrics` 엔드포인트를 통해 메트릭 데이터를 수신하고 처리하는 것을 <br>
+Local Layer에서 확인하기 위함에 있습니다.
 
 ## 주요 기능
 
