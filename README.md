@@ -1,40 +1,44 @@
-# metrics-mock-server
+# Metrics Mock Server
+Ktor 프레임워크를 사용하여 작성된 간단한 Metrics Mock Server입니다.  
+주요 목적은 `/metrics` 엔드포인트를 통해 메트릭 데이터를 수신하고 처리하는 것을
+local station에서 확인하기 위함에 있습니다.
 
-This project was created using the [Ktor Project Generator](https://start.ktor.io).
+## 주요 기능
 
-Here are some useful links to get you started:
+- **Routing**: `/metrics` 경로에 POST 요청을 처리하는 라우팅 기능.
+- **로깅**: 수신된 메트릭 데이터를 로깅하여 확인 가능.
+- **Ktor 기반**: 경량 서버로 빠르고 간단하게 동작.
 
-- [Ktor Documentation](https://ktor.io/docs/home.html)
-- [Ktor GitHub page](https://github.com/ktorio/ktor)
-- The [Ktor Slack chat](https://app.slack.com/client/T09229ZC6/C0A974TJ9). You'll need
-  to [request an invite](https://surveys.jetbrains.com/s3/kotlin-slack-sign-up) to join.
-
-## Features
-
-Here's a list of features included in this project:
-
-| Name                                               | Description                                                 |
-|----------------------------------------------------|-------------------------------------------------------------|
-| [Routing](https://start.ktor.io/p/routing-default) | Allows to define structured routes and associated handlers. |
-
-## Building & Running
-
-To build or run the project, use one of the following tasks:
-
-| Task                          | Description                                                          |
-|-------------------------------|----------------------------------------------------------------------|
-| `./gradlew test`              | Run the tests                                                        |
-| `./gradlew build`             | Build everything                                                     |
-| `buildFatJar`                 | Build an executable JAR of the server with all dependencies included |
-| `buildImage`                  | Build the docker image to use with the fat JAR                       |
-| `publishImageToLocalRegistry` | Publish the docker image locally                                     |
-| `run`                         | Run the server                                                       |
-| `runDocker`                   | Run using the local docker image                                     |
-
-If the server starts successfully, you'll see the following output:
-
-```
-2024-12-04 14:32:45.584 [main] INFO  Application - Application started in 0.303 seconds.
-2024-12-04 14:32:45.682 [main] INFO  Application - Responding at http://0.0.0.0:8080
+## 디렉토리 구조
+```plaintext
+metrics-mock-server/
+├── build/                  # Gradle 빌드 디렉토리
+├── src/
+│   ├── main/
+│   │   ├── kotlin/
+│   │   │   ├── com/
+│   │   │   │   ├── lgw/
+│   │   │   │   │   ├── Application.kt       # Ktor 애플리케이션 진입점
+│   │   │   │   │   ├── route/
+│   │   │   │   │   │   └── HealthCheckRoutes.kt  # /healthCheck : mock server 헬스체크
+|   |   |   |   |   |   └── MetricRoutes.kt  # /metrics 라우트 정의
+│   │   │   │   │   ├── model/
+│   │   │   │   │   │   └── Metric.kt        # Metric 데이터 클래스
+│   │   │   │   │   ├── config/
+│   │   │   │   │   │   └── RoutingConfig.kt # 라우팅 설정
+│   │   ├── resources/
+│   │   │   ├── application.conf            # Ktor 설정 파일
+│   │   │   └── logback.xml                 # 로깅 설정 파일
 ```
 
+## 엔드포인트
+
+### POST `/metrics`
+
+- **설명**: 메트릭 데이터를 수신하고 처리합니다.
+- **요청 본문**: JSON 형식의 메트릭 데이터
+  ```json
+  {
+      "name": "example_metric",
+      "value": 123
+  }
